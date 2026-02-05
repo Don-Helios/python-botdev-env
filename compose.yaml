@@ -1,0 +1,22 @@
+name: discord-bot-dev
+services:
+  python-dev:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+
+    # Meaningful name for easy identificaction in 'docker ps'
+    container_name: python_bot_dev
+
+    # Restart policy: Don't restart automatically if we are just testing
+    restart: "no"
+
+    # Load environment variables (API Token)
+    env_file:
+      - .env
+
+    # BIND MOUNT: volume link for dev
+    volumes:
+      - .:/app
+
+    # OVERRIDE: Instead of running a script immediately, we just keep the container alive
+    command: ["sleep", "infinity"]
